@@ -1,6 +1,7 @@
 //uva615 disjoint_set solution
 #include <bits/stdc++.h>
 using namespace std;
+
 map<int,int>mp;
 map<int,int>used;
 int root_set(int a){
