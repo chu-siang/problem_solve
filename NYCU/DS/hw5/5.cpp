@@ -1,7 +1,7 @@
 //uva10278
 #include<bits/stdc++.h>
 using namespace std;
-const int MAXN = 2e5+5;
+const int MAXN = 2e6+5;
 
 signed main(){
     int nshop, nintersections;
@@ -14,13 +14,8 @@ signed main(){
     for(int i = 0; i < nshop; i++)cin >> shop[i];
     int a,b,w;
     //cin.ignore();
-    while(getline(cin,s)){
-        if(s=="\n" || s == "")break;
-        ss << s;
-        ss >> a >> b >> w;
+    while(cin >> a >> b >> w){
         weight[a][b]=weight[b][a] = w;
-        ss.clear();
-        ss.str("");
     }
     for(int k = 1; k <= nintersections; k++){
         for(int i = 1; i <= nintersections; i++){
