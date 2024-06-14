@@ -17,6 +17,7 @@ signed main(){
     while(cin >> a >> b >> w){
         weight[a][b]=weight[b][a] = w;
     }
+    for(int i = 1; i <= nintersections; i++)weight[i][i] = 0;
     for(int k = 1; k <= nintersections; k++){
         for(int i = 1; i <= nintersections; i++){
             for(int j = 1; j <= nintersections; j++){
@@ -28,7 +29,6 @@ signed main(){
         }
     }
     int mxlength = 0;
-    for(int i = 1; i <= nintersections; i++)weight[i][i] = 0;
     for(int i = 1; i <= nintersections; i++){
         int dis = 1e9;
         for(int j = 0; j < nshop; j++){
