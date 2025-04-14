@@ -15,7 +15,6 @@ class Solution {
                 }
             }
             vector<long long>factorial(n+1, 1);
-            long long ans = 0;
             for(int i = 1; i <= n; ++i){
                 factorial[i] = factorial[i-1] * i;
             }
