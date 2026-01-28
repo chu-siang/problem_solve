@@ -7,9 +7,8 @@ unordered_map<string,map<int,string>>mp;
         mp[key][timestamp] = value;
     }
     string get(string key, int timestamp) {
-        if(mp[key].count())
-        auto i = mp[key].lower_bound(timestamp);
-        return i->second;
+        auto it = mp[key].upper_bound(timestamp);
+        return it == mp[key].begin()?"":prev(it)->second;
     }
 };
 /*
