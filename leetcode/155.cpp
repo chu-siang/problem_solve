@@ -18,6 +18,6 @@ public:
     }
     
     int getMin() {
-        
+        return s2.top();
     }
 };
