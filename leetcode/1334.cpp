@@ -1,35 +1,29 @@
 class Solution {
 public:
     int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
-        vector w(n, vector<int>(n, INT_MAX / 2)); // avoid overflow
-        for (auto& e: edges) {
-            int x = e[0], y = e[1], wt = e[2];
-            w[x][y] = w[y][x] = wt;
+        vector<vector<int>>w(n,vector<int>(n,INT_MAX/2));
+        for(auto i : edges){
+            int v = i[0], e = i[1], k  = i[2];
+            w[v][e] = w[e][v] = k;
         }
-
-        vector memo(n, vector(n, vector<int>(n)));
-        auto dfs = [&](this auto&& dfs, int k, int i, int j) -> int {
-            if (k < 0) { 
-                return w[i][j];
+        auto f = std::move(w);
+        for(int k = 0; k < n; ++k){
+            for(int i = 0; i < n; ++i){
+                for(int j = 0; j < n; ++j){
+                    f[i][j] = min(f[i][j],f[i][k]+f[k][j]);
+                }
             }
-            auto& res = memo[k][i][j]; // reference
-            if (res) { // calculate before
-                return res;
-            }
-            return res = min(dfs(k - 1, i, j), dfs(k - 1, i, k) + dfs(k - 1, k, j));
-        };
-
-        int ans = 0;
-        int min_cnt = n;
-        for (int i = 0; i < n; i++) {
+        }
+        int ans = 0, mn = n;
+        for(int i = 0; i < n; ++i){
             int cnt = 0;
-            for (int j = 0; j < n; j++) {
-                if (j != i && dfs(n - 1, i, j) <= distanceThreshold) {
+            for(int j = 0; j < n; ++j){
+                if(i!=j && f[i][j] <= distanceThreshold){
                     cnt++;
                 }
             }
-            if (cnt <= min_cnt) { // equal and 
-                min_cnt = cnt;
+            if(mn >= cnt){
+                mn = cnt;
                 ans = i;
             }
         }
