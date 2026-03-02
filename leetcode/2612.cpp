@@ -8,15 +8,18 @@ public:
                 indices[i%2].insert(i);
             }
        }
+       indices[0].insert(n);
+       indices[1].insert(n);
        queue<int>q;
        q.push(p);
        vector<int>ans(n,-1);
        ans[p] = 0;
        while(q.size()){
-        int i = q.front(),q.pop();
+        int i = q.front();
+        q.pop();
         int mn =  max(i - k + 1, k - 1 - i);
         int mx = min(i + k - 1,2 * n - k - i - 1);
-        auto &st = indices[i % 2];
+        auto &st = indices[mn % 2];
         for(auto it = st.lower_bound(mn); *it <= mx; it = st.erase(it)){
             ans[*it] = ans[i] + 1;
             q.push(*it);
