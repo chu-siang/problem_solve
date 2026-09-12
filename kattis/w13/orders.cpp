@@ -13,7 +13,7 @@ signed main(){
     int m,s;
 
     vector<int> dp(MAX_M, 0);
-    auto mx = *max_element(arr, arr + n);
+    int mx = MAX_M-1;
     dp[0] = 1;
     for(int i = 0; i < n; ++i){
 	    for(int	j = arr[i]; j <= mx; ++j){
